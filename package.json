@@ -1,0 +1,30 @@
+{
+  "name": "node-ucwa",
+  "version": "1.0.0",
+  "description": "Setup a Http(s) server to proxy requests to UCWA via Node",
+  "main": "ucwa-proxy.js",
+  "scripts": {
+    "test": "node ucwa-proxy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ShelbyZ/node-ucwa.git"
+  },
+  "keywords": [
+    "ucwa"
+  ],
+  "author": "Shelby Hagman <user@shagman.codes>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ShelbyZ/node-ucwa/issues"
+  },
+  "homepage": "https://github.com/ShelbyZ/node-ucwa",
+  "dependencies": {
+    "express": "^4.12.4",
+    "fs": "0.0.2",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "minimist": "^1.1.1",
+    "url": "^0.10.3"
+  }
+}
