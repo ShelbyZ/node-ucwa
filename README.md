@@ -10,6 +10,9 @@ This solution intends to provide a way to proxy requests to UCWA without appendi
 - 1.0.1
   * Removed dependency on express
   * Remove unused variables
+  * Added redirects (307) when request isn't cased properly
+  * Requests not to /proxy will fail 404
+  * Non-POST requests to /proxy will result in 405
   * Code restructuring/cleanup
 - 1.0.0
   * Initial Release

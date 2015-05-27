@@ -19,19 +19,25 @@ function createProxy () {
     logging;
 
     function handleRequest (request, response) {
-        if (request.method.toLowerCase() !== 'post') {
-            response.writeHead(405);
+        var uri = url.parse(request.url);
+        if (uri.pathname === '/proxy') {
+            if (request.method.toLowerCase() !== 'post') {
+                response.writeHead(405);
+                response.write(JSON.stringify({
+                    message: 'The requested resource only supports http method \'POST\'.'
+                }));
+                response.end();
+            } else {
+                proxyRequest(request, response);
+            }
+        } else if (uri.pathname.toLowerCase() === '/proxy') {
+            response.writeHead(307, {
+                Location: '/proxy'
+            });
             response.end();
         } else {
-            var uri = url.parse(request.url);
-            if (uri.pathname === '/proxy') {
-                proxyRequest(request, response);
-            } else if (uri.pathname.toLowerCase() === '/proxy') {
-                response.writeHead(307, {
-                    Location: '/proxy'
-                });
-                response.end();
-            }
+            response.writeHead(404);
+            response.end();
         }
     }
 
@@ -147,7 +153,7 @@ function createProxy () {
     function createRequest (obj, callback) {
         var request,
         protocol = obj.uri.protocol;
-        
+
         delete obj.uri;
 
         if (protocol === 'https:') {
