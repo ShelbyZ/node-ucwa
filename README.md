@@ -6,14 +6,22 @@ UCWA exposes a frame-based mechanism for cross-domain communication for JavaScri
 
 This solution intends to provide a way to proxy requests to UCWA without appending **X-Ms-Origin** which is the behavior seen in any language communicating with UCWA other than JavaScript.
 
+# Version
+- 1.0.1
+  * Removed dependency on express
+  * Remove unused variables
+  * Code restructuring/cleanup
+- 1.0.0
+  * Initial Release
+
 # How it Works
 node> ucwa-proxy [--port --secure [--pfx --passphrase] --logging]
 
 - --port - port to host server on (default 4666)
-- -- secure - whether to host server as Http or Https (default true)
-- -- pfx - Path to PKCS#12 certificate file (default ./certs/node-ucwa.pfx)
-- -- passphrase - optional certificate password (default '')
-- -- logging - logs the request object prior to proxying (default false)
+- --secure - whether to host server as Http or Https (default true)
+- --pfx - Path to PKCS#12 certificate file (default ./certs/node-ucwa.pfx)
+- --passphrase - optional certificate password (default '')
+- --logging - logs the request object prior to proxying (default false)
 
 # Structuring Proxy Requests
 The request format expected by /proxy is as follows:
@@ -64,5 +72,4 @@ Simple - Demonstration of proxying requests to UCWA including auto-discovery, au
 - [fs](https://nodejs.org/api/fs.html) - reading certificate files
 - [minimist](https://www.npmjs.com/package/minimist) - commandline argument processing
 - [http](https://nodejs.org/api/http.html)/[https](https://nodejs.org/api/https.html) - hosting proxy server and issuing requests/responses
-- [express](http://expressjs.com/) - route mapping
 - [url](https://nodejs.org/api/url.html) - url processing
