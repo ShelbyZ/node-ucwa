@@ -7,7 +7,7 @@ var argv = require('minimist')(process.argv.slice(2), {
     default: {
         port: 4666,
         secure: true,
-        pfx: './certs/node-ucwa.pfx',
+        pfx: __dirname + '\\certs\\node-ucwa.pfx',
         passphrase: '',
         logging: false
     }

@@ -7,6 +7,9 @@ UCWA exposes a frame-based mechanism for cross-domain communication for JavaScri
 This solution intends to provide a way to proxy requests to UCWA without appending **X-Ms-Origin** which is the behavior seen in any language communicating with UCWA other than JavaScript.
 
 # Version
+- 1.0.2
+  * Fixed issue running node-ucwa from a script
+  * Updating certificate for localhost
 - 1.0.1
   * Removed dependency on express
   * Remove unused variables
