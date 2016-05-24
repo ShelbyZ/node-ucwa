@@ -1,6 +1,6 @@
 {
   "name": "node-ucwa",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Setup a Http(s) server to proxy requests to UCWA via Node",
   "main": "ucwa-proxy.js",
   "scripts": {

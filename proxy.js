@@ -9,26 +9,36 @@ function createProxy () {
         var server;
 
         logging = options.logging;
+        origin = options.origin;
 
         if (options.secure) {
             server = https.createServer(options.cert, handleRequest).listen(options.port);
         } else {
-            server = http.createServer(null, handleRequest).listen(options.port);
+            server = http.createServer(handleRequest).listen(options.port);
         }
     },
-    logging;
+    logging,
+    origin;
 
     function handleRequest (request, response) {
         var uri = url.parse(request.url);
         if (uri.pathname === '/proxy') {
-            if (request.method.toLowerCase() !== 'post') {
+            var method = request.method.toLowerCase();
+            if (method === 'options') {
+                response.writeHead(200, {
+                    'Access-Control-Allow-Origin': origin,
+	                'Access-Control-Allow-Methods': 'OPTIONS, POST',
+	                'Access-Control-Allow-Headers': 'Content-Type'
+                });
+                response.end();
+            } else if (method === 'post') {
+                proxyRequest(request, response);
+            } else {
                 response.writeHead(405);
                 response.write(JSON.stringify({
-                    message: 'The requested resource only supports http method \'POST\'.'
+                    message: 'The requested resource only supports http method \'OPTIONS\' and \'POST\'.'
                 }));
                 response.end();
-            } else {
-                proxyRequest(request, response);
             }
         } else if (uri.pathname.toLowerCase() === '/proxy') {
             response.writeHead(307, {
@@ -57,7 +67,11 @@ function createProxy () {
                 });
 
                 res.on('end', function () {
-                    response.writeHead(res.statusCode, res.headers);
+                    var headers = res.headers;
+                    headers['Access-Control-Allow-Origin'] = origin;
+                    headers['Access-Control-Allow-Methods'] = 'OPTIONS, POST';
+                    headers['Access-Control-Allow-Headers'] = 'Content-Type';
+                    response.writeHead(res.statusCode, headers);
                     response.write(buffer);
                     response.end();
                 });

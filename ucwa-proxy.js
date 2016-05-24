@@ -2,14 +2,15 @@
 
 var fs = require('fs');
 var argv = require('minimist')(process.argv.slice(2), {
-    string: ['pfx', 'passphrase'],
+    string: ['pfx', 'passphrase', 'origin'],
     boolean: ['secure', 'logging'],
     default: {
         port: 4666,
         secure: true,
         pfx: __dirname + '\\certs\\node-ucwa.pfx',
         passphrase: '',
-        logging: false
+        logging: false,
+        origin: ''
     }
 });
 var ucwaproxy = require('./proxy');
@@ -22,7 +23,8 @@ function parseArgs () {
             pfx: argv.pfx,
             passphrase: argv.passphrase
         },
-        logging: argv.logging
+        logging: argv.logging,
+        origin: argv.origin
     };
 
     if (options.secure === false) {
@@ -39,6 +41,10 @@ function parseArgs () {
         if (options.cert.passphrase === '') {
             delete options.cert.passphrase;
         }
+    }
+    
+    if (options.origin === '') {
+        options.origin = (options.secure === false) ? 'http://localhost' : 'https://localhost';
     }
 
     return options;
