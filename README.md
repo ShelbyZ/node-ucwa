@@ -9,7 +9,8 @@ This solution intends to provide a way to proxy requests to UCWA without appendi
 # Version
 - 1.0.3
   * Fixed issue with Http server constructor not needing null as options parameter
-  * Fixed issue with failing OPTIONS request missing CORS-related headers 
+  * Fixed issue with failing OPTIONS request missing CORS-related headers
+  * Adding origin parameter to be used with Access-Control-Allow-Origin header
 - 1.0.2
   * Fixed issue running node-ucwa from a script
   * Updating certificate for localhost
