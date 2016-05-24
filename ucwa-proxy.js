@@ -10,7 +10,7 @@ var argv = require('minimist')(process.argv.slice(2), {
         pfx: __dirname + '\\certs\\node-ucwa.pfx',
         passphrase: '',
         logging: false,
-        origin: ''
+        origin: '*'
     }
 });
 var ucwaproxy = require('./proxy');
@@ -41,10 +41,6 @@ function parseArgs () {
         if (options.cert.passphrase === '') {
             delete options.cert.passphrase;
         }
-    }
-    
-    if (options.origin === '') {
-        options.origin = (options.secure === false) ? 'http://localhost' : 'https://localhost';
     }
 
     return options;

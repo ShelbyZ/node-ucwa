@@ -7,6 +7,8 @@ UCWA exposes a frame-based mechanism for cross-domain communication for JavaScri
 This solution intends to provide a way to proxy requests to UCWA without appending **X-Ms-Origin** which is the behavior seen in any language communicating with UCWA other than JavaScript.
 
 # Version
+- 1.0.4
+  * Less restrictive Access-Control-Allow-Origin (*)
 - 1.0.3
   * Fixed issue with Http server constructor not needing null as options parameter
   * Fixed issue with failing OPTIONS request missing CORS-related headers
@@ -32,7 +34,7 @@ node> ucwa-proxy [--port --secure [--pfx --passphrase] --logging --origin]
 - --pfx - path to PKCS#12 certificate file (default ./certs/node-ucwa.pfx)
 - --passphrase - optional certificate password (default '')
 - --logging - logs the request object prior to proxying (default false)
-- --origin - specify value for Access-Control-Allow-Origin header otherwise defaults to https://localhost (when secure) or http://localhost
+- --origin - specify value for Access-Control-Allow-Origin header otherwise defaults to *
 
 # Structuring Proxy Requests
 The request format expected by /proxy is as follows:
